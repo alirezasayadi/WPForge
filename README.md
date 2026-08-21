@@ -719,7 +719,7 @@ WPForge/
 │       └── plugin-name/
 └── .github/
     └── workflows/
-        └── test-and-release.yml
+        └── release.yml
 ```
 
 The `templates/wordpress-plugin/plugin-name` directory contains the WordPress Plugin Boilerplate template used by WPForge.
