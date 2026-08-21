@@ -1,1 +1,54 @@
+# WPForge - Git attributes
+
+# WordPress plugin template is generated content, not WPForge source.
 templates/wordpress-plugin/** linguist-vendored
+
+# Build and release artifacts.
+dist/** linguist-generated
+build/** linguist-generated
+release/** linguist-generated
+artifacts/** linguist-generated
+
+# Python environments and caches.
+.venv/** linguist-vendored
+venv/** linguist-vendored
+__pycache__/** linguist-vendored
+.pytest_cache/** linguist-vendored
+.mypy_cache/** linguist-vendored
+.ruff_cache/** linguist-vendored
+
+# Documentation.
+*.md linguist-documentation
+*.txt linguist-documentation
+
+# Binary assets.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.bmp binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.7z binary
+*.tar binary
+*.gz binary
+
+# OS metadata.
+.DS_Store binary
+Thumbs.db binary
+desktop.ini binary
+
+# Normalize source files to LF.
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.php text eol=lf
+*.js text eol=lf
+*.css text eol=lf
