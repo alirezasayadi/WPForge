@@ -1,7 +1,7 @@
 # WPForge 🛠️
 
 <p align="center">
-  <strong>ابزار خط فرمان چندسکویی برای ساخت سریع افزونه‌های وردپرس بر پایه WordPress Plugin Boilerplate</strong>
+  <strong>ابزار CLI چندسکویی برای ساخت افزونه‌های وردپرس بر پایه WordPress Plugin Boilerplate</strong>
 </p>
 
 <p align="center">
@@ -9,24 +9,24 @@
     <img src="https://img.shields.io/github/v/release/alirezasayadi/WPForge?label=Latest%20Release" alt="آخرین نسخه">
   </a>
   <a href="https://github.com/alirezasayadi/WPForge/releases">
-    <img src="https://img.shields.io/github/downloads/alirezasayadi/WPForge/total?label=Downloads" alt="دانلودها">
+    <img src="https://img.shields.io/github/downloads/alirezasayadi/WPForge/total?label=Downloads" alt="تعداد دانلودها">
   </a>
   <a href="https://github.com/alirezasayadi/WPForge/releases">
     <img src="https://img.shields.io/github/release-date/alirezasayadi/WPForge?label=Released" alt="تاریخ انتشار">
   </a>
   <a href="https://github.com/alirezasayadi/WPForge/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/alirezasayadi/WPForge/test-and-release.yml?label=Build%20%26%20Tests" alt="Build & Tests">
+    <img src="https://img.shields.io/github/actions/workflow/status/alirezasayadi/WPForge/test-and-release.yml?label=Build%20%26%20Tests" alt="ساخت و تست‌ها">
   </a>
   <a href="https://github.com/alirezasayadi/WPForge/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/alirezasayadi/WPForge" alt="مجوز">
   </a>
   <a href="https://github.com/alirezasayadi/WPForge">
-    <img src="https://img.shields.io/github/stars/alirezasayadi/WPForge?style=flat" alt="ستاره‌ها">
+    <img src="https://img.shields.io/github/stars/alirezasayadi/WPForge?style=flat" alt="ستاره‌های GitHub">
   </a>
 </p>
 
 <p align="center">
-  <a href="README.md">🇬🇧 English Documentation</a>
+  <a href="README.md">🇬🇧 English</a>
   ·
   <a href="https://github.com/alirezasayadi/WPForge/releases/latest">⬇️ دانلود</a>
   ·
@@ -39,95 +39,81 @@
 
 ## 📖 درباره WPForge
 
-**WPForge** یک ابزار خط فرمان چندسکویی است که برای ساخت سریع افزونه‌های وردپرس با استفاده از ساختار **WordPress Plugin Boilerplate (WPPB)** طراحی شده است.
+**WPForge** یک ابزار خط فرمان (CLI) چندسکویی است که برای ساخت سریع افزونه‌های وردپرس با استفاده از ساختار **WordPress Plugin Boilerplate (WPPB)** طراحی شده است.
 
-هدف WPForge این است که شروع ساخت یک افزونه جدید وردپرس را سریع‌تر و ساده‌تر کند. این ابزار به‌صورت خودکار ساختار افزونه را ایجاد کرده و اطلاعات رایج Boilerplate را با اطلاعات موردنظر شما جایگزین می‌کند.
-
-اطلاعاتی که WPForge به‌صورت خودکار مدیریت می‌کند:
+هدف WPForge این است که شروع یک پروژه جدید افزونه وردپرس را سریع‌تر و ساده‌تر کند. این ابزار به‌صورت خودکار ساختار افزونه را ایجاد کرده و اطلاعات رایج موجود در Boilerplate را با اطلاعات موردنظر شما جایگزین می‌کند، از جمله:
 
 * نام افزونه
-* Slug افزونه
+* اسلاگ افزونه
 * آدرس افزونه
-* نام نویسنده
+* اطلاعات نویسنده
 * ایمیل نویسنده
 * آدرس نویسنده
 * توضیحات افزونه
 
-WPForge با **Python** نوشته شده و نسخه‌های آماده اجرا برای سیستم‌عامل‌های زیر ارائه می‌دهد:
+WPForge با **Python** نوشته شده و فایل‌های اجرایی آماده برای سیستم‌عامل‌های زیر ارائه می‌دهد:
 
 * 🪟 Windows
 * 🐧 Linux
 * 🍎 macOS
 
-در صورت استفاده از نسخه‌های آماده، نیازی به نصب Python ندارید.
+در صورت استفاده از نسخه‌های اجرایی آماده، نیازی به نصب Python ندارید.
 
 ---
 
 ## ✨ امکانات
 
-* 🛠️ ساخت افزونه وردپرس بر پایه WordPress Plugin Boilerplate
+* 🛠️ ساخت افزونه‌های وردپرس بر اساس WordPress Plugin Boilerplate
 * 🪟 پشتیبانی از Windows
 * 🐧 پشتیبانی از Linux
 * 🍎 پشتیبانی از macOS
-* ⚡ حالت تعاملی CLI
+* ⚡ رابط تعاملی خط فرمان
 * 🤖 حالت غیرتعاملی CLI
 * 📝 جایگزینی خودکار اطلاعات افزونه
-* 🔤 تبدیل خودکار Slug افزونه
+* 🔤 تبدیل خودکار اسلاگ افزونه
 * 📁 تغییر نام خودکار فایل‌ها و پوشه‌های Template
 * 👤 پشتیبانی از تنظیمات نویسنده
-* 🌐 فایل تنظیمات مشترک بین سیستم‌عامل‌ها
-* 📦 فایل اجرایی مستقل
+* 🌐 فایل تنظیمات چندسکویی
+* 📦 فایل‌های اجرایی مستقل
 * 🔧 سازگار با WordPress CLI (`wp`)
-* 🚀 عدم نیاز به نصب Python در نسخه‌های آماده
-* 🔄 ارائه نسخه برای سیستم‌عامل‌ها و معماری‌های مختلف
+* 🚀 بدون نیاز به نصب Python در نسخه‌های اجرایی آماده
+* 🔄 ارائه نسخه‌های مختلف برای سیستم‌عامل‌ها و معماری‌های گوناگون
 
 ---
 
 ## 📥 دانلود
 
-[آخرین نسخه WPForge](https://github.com/alirezasayadi/WPForge/releases/latest?utm_source=chatgpt.com)
+[آخرین نسخه](https://github.com/alirezasayadi/WPForge/releases/latest)
 
----
+### 🪟 Windows
 
-## 🪟 Windows
-
-### ۱. دانلود WPForge
-
-آخرین نسخه WPForge را از بخش Releases دانلود کنید و فایل اجرایی Windows را دریافت کنید.
+آخرین فایل اجرایی Windows را از بخش Releases دانلود کرده و آن را از طریق PowerShell یا Command Prompt اجرا کنید.
 
 برای مثال:
-
-```text
-wpforge.exe
-```
-
-### ۲. اجرای WPForge
-
-PowerShell یا Command Prompt را باز کنید و فایل را اجرا کنید:
 
 ```powershell
 C:\Tools\WPForge\wpforge.exe
 ```
 
-در صورت اجرای صحیح، باید چیزی مشابه زیر مشاهده کنید:
+پس از اجرا باید چیزی مشابه زیر مشاهده کنید:
 
 ```text
 WPForge - WordPress Plugin Generator
 ```
 
-### افزودن اختیاری WPForge به PATH
+#### اختیاری — اضافه کردن WPForge به PATH
 
-اگر می‌خواهید بتوانید از هر پوشه‌ای فقط با اجرای دستور زیر WPForge را اجرا کنید:
+اگر می‌خواهید بتوانید دستور زیر را:
 
 ```powershell
 wpforge
 ```
 
-پوشه‌ای که فایل `wpforge.exe` در آن قرار دارد را به `PATH` ویندوز اضافه کنید.
+از هر پوشه‌ای اجرا کنید، مسیر پوشه WPForge را به متغیر `PATH` در Windows اضافه کنید.
 
-پس از اضافه کردن PATH، PowerShell یا Command Prompt را مجدداً باز کنید.
+پس از اضافه کردن مسیر، PowerShell یا Command Prompt را مجدداً باز کنید.
 
-سپس بررسی کنید:
+سپس اجرا کنید:
 
 ```powershell
 wpforge --version
@@ -135,11 +121,11 @@ wpforge --version
 
 ---
 
-## 🐧 Linux
+### 🐧 Linux
 
-### ۱. دانلود WPForge
+#### 1. دانلود WPForge
 
-به بخش آخرین Release بروید و نسخه Linux متناسب با سیستم خود را دانلود کنید.
+آخرین Release را باز کرده و فایل اجرایی Linux را دانلود کنید.
 
 برای مثال:
 
@@ -147,7 +133,7 @@ wpforge --version
 wpforge-linux-x64
 ```
 
-### ۲. قابل اجرا کردن فایل
+#### 2. اجرایی کردن فایل
 
 ترمینال را باز کرده و اجرا کنید:
 
@@ -155,15 +141,15 @@ wpforge-linux-x64
 chmod +x wpforge-linux-x64
 ```
 
-### ۳. اجرای WPForge
+#### 3. اجرای WPForge
 
 ```bash
 ./wpforge-linux-x64
 ```
 
-### نصب اختیاری به‌صورت سراسری
+#### اختیاری — نصب به‌صورت سراسری
 
-می‌توانید فایل را به یکی از مسیرهای موجود در `PATH` منتقل کنید:
+می‌توانید فایل اجرایی را به یکی از مسیرهای موجود در `PATH` منتقل کنید:
 
 ```bash
 sudo mv wpforge-linux-x64 /usr/local/bin/wpforge
@@ -179,32 +165,32 @@ wpforge --version
 
 ---
 
-## 🍎 macOS
+### 🍎 macOS
 
-### ۱. دانلود WPForge
+#### 1. دانلود WPForge
 
 آخرین Release را باز کرده و نسخه مناسب Mac خود را دانلود کنید.
 
-نسخه‌های قابل ارائه ممکن است شامل موارد زیر باشند:
+نسخه‌های موجود ممکن است شامل موارد زیر باشند:
 
 * Apple Silicon (ARM64)
 * Intel (x64)
 
-### ۲. قابل اجرا کردن فایل
+#### 2. اجرایی کردن فایل
 
-برای Apple Silicon:
+ترمینال را باز کرده و اجرا کنید:
 
 ```bash
 chmod +x wpforge-macos-arm64
 ```
 
-### ۳. اجرای WPForge
+#### 3. اجرای WPForge
 
 ```bash
 ./wpforge-macos-arm64
 ```
 
-### نصب اختیاری به‌صورت سراسری
+#### اختیاری — نصب به‌صورت سراسری
 
 ```bash
 sudo mv wpforge-macos-arm64 /usr/local/bin/wpforge
@@ -218,16 +204,16 @@ wpforge --version
 
 ---
 
-## 🐍 اجرای WPForge با Python
+## 🐍 نصب Python
 
-اگر ترجیح می‌دهید WPForge را مستقیماً از Source اجرا کنید، باید Python نصب داشته باشید.
+اگر ترجیح می‌دهید WPForge را مستقیماً از Source اجرا کنید، نصب Python ضروری است.
 
 ### پیش‌نیازها
 
-* Python 3.10 یا بالاتر
+* Python 3.10+
 * pip
 
-### دریافت Source
+### دریافت Repository
 
 ```bash
 git clone https://github.com/alirezasayadi/WPForge.git
@@ -239,7 +225,7 @@ git clone https://github.com/alirezasayadi/WPForge.git
 cd WPForge
 ```
 
-### ساخت Virtual Environment
+### ایجاد محیط مجازی
 
 #### Windows
 
@@ -281,18 +267,18 @@ python main.py
 
 ## 🚀 نحوه استفاده
 
-WPForge از دو حالت اصلی پشتیبانی می‌کند:
+WPForge از دو حالت پشتیبانی می‌کند:
 
-* حالت تعاملی (Interactive)
-* حالت غیرتعاملی (Non-Interactive)
+* حالت تعاملی
+* حالت غیرتعاملی
 
 ---
 
 ## 🧑‍💻 حالت تعاملی
 
-حالت تعاملی برای کاربران تازه‌کار پیشنهاد می‌شود.
+حالت تعاملی برای کاربران مبتدی پیشنهاد می‌شود.
 
-کافی است دستور زیر را اجرا کنید:
+کافی است اجرا کنید:
 
 ```bash
 wpforge
@@ -306,7 +292,7 @@ wpforge new
 
 WPForge اطلاعات موردنیاز را از شما دریافت می‌کند.
 
-### نمونه
+### مثال
 
 ```text
 Plugin name: My Awesome Plugin
@@ -322,31 +308,32 @@ Plugin description: My awesome WordPress plugin
 
 ---
 
-## 📁 افزونه کجا ساخته می‌شود؟
+## 📁 افزونه در کجا ایجاد می‌شود؟
 
-WPForge افزونه را در **پوشه فعلی** ایجاد می‌کند.
+WPForge افزونه را داخل پوشه‌ای که در حال حاضر در آن قرار دارید ایجاد می‌کند.
 
-برای مثال اگر ساختار وردپرس شما به شکل زیر باشد:
+برای مثال:
 
 ```text
 wordpress/
 └── wp-content/
     └── plugins/
+        └── my-awesome-plugin/
 ```
 
-و وارد این پوشه شوید:
+اگر اجرا کنید:
 
 ```bash
 cd /path/to/wordpress/wp-content/plugins
 ```
 
-سپس اجرا کنید:
+سپس:
 
 ```bash
 wpforge new
 ```
 
-افزونه در این مسیر ساخته می‌شود:
+ساختار زیر ایجاد خواهد شد:
 
 ```text
 wp-content/
@@ -354,13 +341,13 @@ wp-content/
     └── my-awesome-plugin/
 ```
 
-WPForge همچنین بررسی می‌کند که پوشه فعلی شبیه مسیر زیر باشد:
+WPForge همچنین بررسی می‌کند که آیا مسیر فعلی شبیه مسیر زیر است یا خیر:
 
 ```text
 wp-content/plugins
 ```
 
-اگر مسیر فعلی مناسب نباشد، WPForge یک هشدار نمایش می‌دهد.
+اگر مسیر فعلی این ساختار را نداشته باشد، WPForge یک هشدار نمایش می‌دهد.
 
 ---
 
@@ -368,13 +355,13 @@ wp-content/plugins
 
 حالت غیرتعاملی برای موارد زیر مناسب است:
 
-* Scriptها
-* Automation
+* اسکریپت‌ها
+* اتوماسیون
 * CI/CD
 * GitHub Actions
-* توسعه‌دهندگانی که اطلاعات افزونه را از قبل می‌دانند
+* توسعه‌دهندگانی که مقادیر موردنیاز را از قبل می‌دانند
 
-### Linux / macOS
+استفاده:
 
 ```bash
 wpforge new --non-interactive \
@@ -389,7 +376,7 @@ wpforge new --non-interactive \
 
 ### Windows PowerShell
 
-در PowerShell می‌توانید از Backtick استفاده کنید:
+در PowerShell برای ادامه دادن دستور در خط بعد از Backtick استفاده کنید:
 
 ```powershell
 wpforge new --non-interactive `
@@ -402,7 +389,7 @@ wpforge new --non-interactive `
   --plugin-description "My WordPress plugin"
 ```
 
-یا همه پارامترها را در یک خط بنویسید:
+یا می‌توانید کل دستور را در یک خط بنویسید:
 
 ```powershell
 wpforge new --non-interactive --plugin-name "My Plugin" --plugin-slug my-plugin --plugin-url https://example.com/my-plugin --author-name "John Doe" --author-email john@example.com --author-url https://example.com --plugin-description "My WordPress plugin"
@@ -412,34 +399,36 @@ wpforge new --non-interactive --plugin-name "My Plugin" --plugin-slug my-plugin 
 
 ## 📋 گزینه‌های دستورات
 
-برای مشاهده گزینه‌های موجود اجرا کنید:
+برای مشاهده راهنمای دستور اجرا کنید:
 
 ```bash
 wpforge new --help
 ```
 
-| گزینه                  | توضیحات                  |
-| ---------------------- | ------------------------ |
-| `--plugin-name`        | نام افزونه               |
-| `--plugin-slug`        | Slug افزونه              |
-| `--plugin-url`         | آدرس افزونه              |
-| `--author-name`        | نام نویسنده              |
-| `--author-email`       | ایمیل نویسنده            |
-| `--author-url`         | آدرس نویسنده             |
-| `--plugin-description` | توضیحات افزونه           |
-| `--non-interactive`    | غیرفعال کردن حالت تعاملی |
+گزینه‌های موجود:
+
+| گزینه                  | توضیحات                       |
+| ---------------------- | ----------------------------- |
+| `--plugin-name`        | نام افزونه                    |
+| `--plugin-slug`        | اسلاگ افزونه                  |
+| `--plugin-url`         | آدرس افزونه                   |
+| `--author-name`        | نام نویسنده                   |
+| `--author-email`       | ایمیل نویسنده                 |
+| `--author-url`         | آدرس نویسنده                  |
+| `--plugin-description` | توضیحات افزونه                |
+| `--non-interactive`    | غیرفعال کردن ورودی‌های تعاملی |
 
 ---
 
-## 🔤 قوانین Plugin Slug
+## 🔤 اسلاگ افزونه
 
-Slug افزونه باید شامل موارد زیر باشد:
+اسلاگ افزونه باید شامل موارد زیر باشد:
 
 * حروف کوچک انگلیسی
 * اعداد
 * خط تیره (`-`)
 
-### نمونه‌های معتبر
+### معتبر
 
 ```text
 my-plugin
@@ -449,7 +438,7 @@ my-plugin-123
 advanced-discount
 ```
 
-### نمونه‌های نامعتبر
+### نامعتبر
 
 ```text
 My Plugin
@@ -459,7 +448,7 @@ My-Plugin
 my--plugin
 ```
 
-Slug علاوه بر نام پوشه افزونه، برای تولید برخی نام‌گذاری‌های PHP نیز استفاده می‌شود.
+اسلاگ برای ایجاد نام‌گذاری‌های PHP نیز استفاده می‌شود.
 
 برای مثال:
 
@@ -473,13 +462,13 @@ my-awesome-plugin
 my_awesome_plugin
 ```
 
-تبدیل می‌شود.
-
-همچنین:
+و:
 
 ```text
 MyAwesomePlugin
 ```
+
+تبدیل می‌شود.
 
 ---
 
@@ -491,7 +480,7 @@ WPForge از یک فایل تنظیمات با نام زیر پشتیبانی م
 .wpforge
 ```
 
-این فایل در Home Directory کاربر ذخیره می‌شود.
+این فایل در پوشه Home کاربر ذخیره می‌شود.
 
 ### Windows
 
@@ -511,7 +500,13 @@ C:\Users\YourName\.wpforge
 
 ### نمونه فایل تنظیمات
 
-فایل `.wpforge` را ایجاد کرده و موارد زیر را داخل آن قرار دهید:
+فایل زیر را ایجاد کنید:
+
+```text
+.wpforge
+```
+
+و داخل آن قرار دهید:
 
 ```ini
 author=John Doe
@@ -519,13 +514,13 @@ authorEmail=john@example.com
 authorUrl=https://example.com
 ```
 
-WPForge به‌صورت خودکار از این اطلاعات به‌عنوان مقادیر پیش‌فرض استفاده می‌کند.
+WPForge به‌صورت خودکار از این مقادیر به‌عنوان مقادیر پیش‌فرض استفاده خواهد کرد.
 
-این قابلیت برای افرادی که به‌طور مداوم افزونه ایجاد می‌کنند بسیار کاربردی است.
+این قابلیت مخصوصاً برای افرادی که به‌طور مداوم افزونه ایجاد می‌کنند بسیار کاربردی است.
 
 ---
 
-## 🧪 مثال کامل
+## 🧪 مثال
 
 فرض کنید دستور زیر را اجرا می‌کنید:
 
@@ -551,15 +546,15 @@ WPForge پوشه زیر را ایجاد می‌کند:
 advanced-security/
 ```
 
-این پوشه شامل ساختار WordPress Plugin Boilerplate خواهد بود.
+و ساختار WordPress Plugin Boilerplate را داخل آن قرار می‌دهد.
 
-فایل‌های تولیدشده نیز به‌صورت خودکار با اطلاعات واردشده به‌روزرسانی می‌شوند.
+فایل‌های ایجادشده نیز به‌صورت خودکار با اطلاعات واردشده به‌روزرسانی می‌شوند.
 
 ---
 
-## 🔧 استفاده از WordPress CLI
+## 🔧 WordPress CLI
 
-پس از ساخت افزونه، می‌توانید آن را با استفاده از WP-CLI فعال کنید:
+پس از ایجاد افزونه، می‌توانید آن را با استفاده از WP-CLI فعال کنید:
 
 ```bash
 wp plugin activate my-plugin
@@ -571,30 +566,493 @@ wp plugin activate my-plugin
 wp plugin activate advanced-security
 ```
 
-اطمینان حاصل کنید که WP-CLI نصب شده باشد و دستور را از داخل نصب وردپرس اجرا کنید.
+اطمینان حاصل کنید که WP-CLI نصب شده باشد و دستور را از داخل نصب WordPress اجرا کنید.
 
 ---
 
-## 📦 نسخه‌ها و Releases
+## 📦 نسخه‌ها
 
 نسخه‌های WPForge در GitHub منتشر می‌شوند.
 
-[مشاهده همه نسخه‌ها](https://github.com/alirezasayadi/WPForge/releases?utm_source=chatgpt.com)
+[مشاهده تمام نسخه‌ها](https://github.com/alirezasayadi/WPForge/releases)
 
-هر Release ممکن است شامل نسخه‌های زیر باشد:
+هر Release ممکن است شامل Buildهای زیر باشد:
 
 * 🪟 Windows
 * 🐧 Linux
 * 🍎 macOS
-* 🐍 Python / Source
+* 🐍 Python/Source
 
 ### نسخه پیشنهادی
 
-برای اکثر کاربران، استفاده از آخرین نسخه پایدار پیشنهاد می‌شود.
+برای اکثر کاربران، دانلود آخرین نسخه پایدار پیشنهاد می‌شود.
 
-اگر فقط قصد استفاده از WPForge را دارید، نیازی به دانلود Source Code ندارید.
+در صورتی که قصد توسعه خود WPForge را ندارید، نیازی به دانلود Source Code نخواهید داشت.
 
-Source Code بیشتر برای توسعه خود WPForge کاربرد دارد.
+---
+
+## 🚀 ایجاد Release
+
+WPForge از Git Tagها برای ایجاد نسخه‌های جدید استفاده می‌کند.
+
+هنگامی که یک Tag جدید مانند `v1.0.0` به GitHub Push شود، GitHub Actions به‌صورت خودکار موارد زیر را انجام می‌دهد:
+
+* 🪟 ساخت نسخه Windows x64
+* 🐧 ساخت نسخه Linux x64
+* 🍎 ساخت نسخه macOS ARM64
+* 🍎 ساخت نسخه macOS Intel x64
+* 🔐 ایجاد Checksumهای SHA-256
+* 📦 ایجاد GitHub Release
+* ⬆️ آپلود تمام فایل‌های کامپایل‌شده در Release
+* 📝 ایجاد Release Notes
+
+بنابراین نیازی نیست برنامه را برای هر سیستم‌عامل به‌صورت دستی Build کنید.
+
+---
+
+### 📋 پیش‌نیازهای انتشار Release
+
+قبل از ایجاد Release، مطمئن شوید:
+
+1. Working Tree شما تمیز است.
+2. تمام تغییرات Commit شده‌اند.
+3. روی Branch صحیح قرار دارید.
+4. پروژه با موفقیت Build می‌شود.
+5. شماره نسخه صحیح است.
+
+وضعیت Git را بررسی کنید:
+
+```bash
+git status
+```
+
+در حالت ایده‌آل باید چیزی مشابه زیر مشاهده کنید:
+
+```text
+nothing to commit, working tree clean
+```
+
+---
+
+### 🪟 Windows
+
+WPForge شامل فایل زیر است:
+
+```text
+scripts/release.bat
+```
+
+این Script برای کاربران Windows طراحی شده است.
+
+### 1. باز کردن Command Prompt
+
+**Command Prompt (CMD)** را باز کرده و وارد پوشه WPForge شوید:
+
+```bat
+cd D:\WPForge
+```
+
+در صورتی که WPForge در مسیر دیگری قرار دارد، می‌توانید مسیر مربوط به خودتان را استفاده کنید.
+
+### 2. اجرای Release Script
+
+برای مثال، برای انتشار نسخه `1.0.0`:
+
+```bat
+scripts\release.bat 1.0.0
+```
+
+این Script، Tag زیر را ایجاد و به GitHub Push می‌کند:
+
+```text
+v1.0.0
+```
+
+### 3. بعد از آن چه اتفاقی می‌افتد؟
+
+پس از Push شدن Tag:
+
+```text
+release.bat
+    ↓
+Git commit
+    ↓
+Git tag v1.0.0
+    ↓
+Push tag to GitHub
+    ↓
+GitHub Actions starts
+    ↓
+Build Windows
+Build Linux
+Build macOS ARM64
+Build macOS x64
+    ↓
+Generate SHA256SUMS.txt
+    ↓
+Create GitHub Release
+    ↓
+Upload release files
+```
+
+می‌توانید فرآیند Build را از قسمت زیر مشاهده کنید:
+
+**GitHub → Actions**
+
+---
+
+### 🐧 Linux / 🍎 macOS
+
+WPForge همچنین شامل فایل زیر است:
+
+```text
+scripts/release.sh
+```
+
+این Script در Linux و macOS قابل استفاده است.
+
+### 1. باز کردن Terminal
+
+وارد پوشه WPForge شوید:
+
+```bash
+cd /path/to/WPForge
+```
+
+برای مثال:
+
+```bash
+cd ~/WPForge
+```
+
+### 2. اجرایی کردن Script
+
+این کار را فقط یک بار انجام دهید:
+
+```bash
+chmod +x scripts/release.sh
+```
+
+### 3. ایجاد Release
+
+برای مثال:
+
+```bash
+./scripts/release.sh 1.0.0
+```
+
+این دستور:
+
+```text
+v1.0.0
+```
+
+را ایجاد کرده و Tag را به GitHub Push می‌کند.
+
+پس از آن GitHub Actions به‌صورت خودکار تمام Platformهای پشتیبانی‌شده را Build خواهد کرد.
+
+---
+
+### 🔢 نسخه‌بندی
+
+نسخه‌های WPForge از فرمت زیر استفاده می‌کنند:
+
+```text
+MAJOR.MINOR.PATCH
+```
+
+برای مثال:
+
+```text
+1.0.0
+1.0.1
+1.1.0
+2.0.0
+```
+
+Git Tag به‌صورت خودکار دارای پیشوند `v` خواهد بود:
+
+```text
+v1.0.0
+v1.0.1
+v1.1.0
+v2.0.0
+```
+
+### مثال‌های نسخه‌بندی
+
+رفع Bug:
+
+```text
+1.0.0 → 1.0.1
+```
+
+افزودن قابلیت جدید بدون ایجاد تغییر ناسازگار:
+
+```text
+1.0.0 → 1.1.0
+```
+
+تغییر ناسازگار (Breaking Change):
+
+```text
+1.0.0 → 2.0.0
+```
+
+---
+
+### ⚠️ مهم
+
+هنگام استفاده از Release Scriptها، **به‌صورت دستی GitHub Release ایجاد نکنید.**
+
+فرآیند انتشار به‌صورت خودکار انجام می‌شود.
+
+تنها کاری که باید انجام دهید، ایجاد و Push کردن Version Tag است.
+
+GitHub Actions به‌صورت خودکار Release را ایجاد خواهد کرد.
+
+---
+
+### 🛠️ انتشار دستی
+
+اگر نمی‌خواهید از Scriptهای ارائه‌شده استفاده کنید، می‌توانید Release را به‌صورت دستی ایجاد کنید.
+
+ابتدا تغییرات خود را Commit کنید:
+
+```bash
+git add .
+git commit -m "Release v1.0.0"
+```
+
+Tag را ایجاد کنید:
+
+```bash
+git tag v1.0.0
+```
+
+Branch را Push کنید:
+
+```bash
+git push origin main
+```
+
+سپس Tag را Push کنید:
+
+```bash
+git push origin v1.0.0
+```
+
+پس از Push شدن Tag، GitHub Actions به‌صورت خودکار Workflow مربوط به Release را اجرا می‌کند.
+
+---
+
+### 🔍 بررسی Release
+
+پس از Push کردن Tag، Repository را در GitHub باز کرده و وارد بخش:
+
+```text
+Actions
+```
+
+شوید.
+
+باید Workflow زیر را مشاهده کنید:
+
+```text
+Build and Release WPForge
+```
+
+صبر کنید تا تمام Jobها با موفقیت به پایان برسند.
+
+Workflow باید فایل‌های زیر را تولید کند:
+
+```text
+Windows x64
+Linux x64
+macOS ARM64
+macOS Intel x64
+SHA256SUMS.txt
+```
+
+فایل‌های نهایی در مسیر زیر در دسترس خواهند بود:
+
+```text
+GitHub
+  → Releases
+    → WPForge v1.0.0
+```
+
+---
+
+### 📦 فایل‌های Release
+
+یک Release معمولی WPForge شامل فایل‌های زیر است:
+
+```text
+WPForge-v1.0.0-Windows-x64.exe
+WPForge-v1.0.0-Linux-x64
+WPForge-v1.0.0-macOS-arm64
+WPForge-v1.0.0-macOS-x64
+SHA256SUMS.txt
+```
+
+### Windows
+
+دانلود کنید:
+
+```text
+WPForge-v1.0.0-Windows-x64.exe
+```
+
+نیازی به نصب Python نیست.
+
+### Linux
+
+دانلود کنید:
+
+```text
+WPForge-v1.0.0-Linux-x64
+```
+
+سپس:
+
+```bash
+chmod +x WPForge-v1.0.0-Linux-x64
+```
+
+اجرا:
+
+```bash
+./WPForge-v1.0.0-Linux-x64
+```
+
+### macOS Apple Silicon
+
+برای Macهای مجهز به Apple Silicon مانند M1، M2، M3 و M4:
+
+```text
+WPForge-v1.0.0-macOS-arm64
+```
+
+اجرا:
+
+```bash
+chmod +x WPForge-v1.0.0-macOS-arm64
+./WPForge-v1.0.0-macOS-arm64
+```
+
+### macOS Intel
+
+برای Macهای مجهز به پردازنده Intel:
+
+```text
+WPForge-v1.0.0-macOS-x64
+```
+
+اجرا:
+
+```bash
+chmod +x WPForge-v1.0.0-macOS-x64
+./WPForge-v1.0.0-macOS-x64
+```
+
+---
+
+### 🔐 Checksumهای SHA-256
+
+هر Release شامل فایل زیر است:
+
+```text
+SHA256SUMS.txt
+```
+
+این فایل شامل Hashهای SHA-256 فایل‌های اجرایی Release است.
+
+با استفاده از این Hashها می‌توانید بررسی کنید که فایل دانلودشده خراب یا تغییر داده نشده باشد.
+
+### Windows
+
+در PowerShell:
+
+```powershell
+Get-FileHash .\WPForge-v1.0.0-Windows-x64.exe -Algorithm SHA256
+```
+
+### Linux
+
+```bash
+sha256sum WPForge-v1.0.0-Linux-x64
+```
+
+### macOS
+
+```bash
+shasum -a 256 WPForge-v1.0.0-macOS-arm64
+```
+
+Hash تولیدشده را با مقدار مربوط به همان فایل در:
+
+```text
+SHA256SUMS.txt
+```
+
+مقایسه کنید.
+
+---
+
+### ❌ اگر Release با خطا مواجه شد
+
+اگر GitHub Actions با خطا مواجه شد:
+
+1. Repository را در GitHub باز کنید.
+2. وارد بخش **Actions** شوید.
+3. Workflow ناموفق را باز کنید.
+4. Job ناموفق را انتخاب کنید.
+5. پیام خطا را بررسی کنید.
+
+بلافاصله یک Tag دیگر با همان Version ایجاد نکنید.
+
+برای مثال، اگر:
+
+```text
+v1.0.0
+```
+
+با خطا مواجه شد، ابتدا مشکل را برطرف کنید.
+
+سپس از یک نسخه Patch جدید استفاده کنید:
+
+```text
+v1.0.1
+```
+
+مگر اینکه Tag قبلی را به‌صورت ایمن حذف و دوباره ایجاد کنید.
+
+---
+
+### 💡 فرآیند پیشنهادی انتشار
+
+برای توسعه معمول، فرآیند زیر پیشنهاد می‌شود:
+
+```text
+1. ایجاد تغییرات
+      ↓
+2. تست محلی
+      ↓
+3. Commit کردن تغییرات
+      ↓
+4. اجرای release.bat / release.sh
+      ↓
+5. Push شدن Tag با نام vX.Y.Z
+      ↓
+6. Build تمام Platformها توسط GitHub Actions
+      ↓
+7. ایجاد GitHub Release
+      ↓
+8. دانلود فایل‌های اجرایی توسط کاربران
+```
+
+این روش باعث می‌شود فرآیند Release در Windows، Linux و macOS ساده و یکسان باقی بماند.
 
 ---
 
@@ -606,7 +1064,7 @@ Source Code بیشتر برای توسعه خود WPForge کاربرد دارد.
 
 ### Linux
 
-نسخه جدید را دانلود کرده و فایل قبلی را جایگزین کنید:
+آخرین Binary را دانلود کرده و نصب فعلی را جایگزین کنید:
 
 ```bash
 sudo mv wpforge-linux-x64 /usr/local/bin/wpforge
@@ -614,7 +1072,7 @@ sudo mv wpforge-linux-x64 /usr/local/bin/wpforge
 
 ### macOS
 
-نسخه جدید macOS را دانلود کرده و فایل اجرایی قبلی را جایگزین کنید.
+آخرین Binary مربوط به macOS را دانلود کرده و نسخه قبلی را جایگزین کنید.
 
 ### Python
 
@@ -632,9 +1090,9 @@ pip install -r requirements.txt --upgrade
 
 ---
 
-## 🛠️ توسعه WPForge
+## 🛠️ توسعه
 
-Repository را Clone کنید:
+Repository را دریافت کنید:
 
 ```bash
 git clone https://github.com/alirezasayadi/WPForge.git
@@ -646,7 +1104,7 @@ git clone https://github.com/alirezasayadi/WPForge.git
 cd WPForge
 ```
 
-یک Virtual Environment ایجاد کنید.
+یک محیط مجازی ایجاد کنید.
 
 ### Windows
 
@@ -668,7 +1126,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-اجرای پروژه:
+اجرا:
 
 ```bash
 python main.py
@@ -680,7 +1138,7 @@ python main.py
 python main.py --help
 ```
 
-ساخت افزونه:
+ایجاد افزونه:
 
 ```bash
 python main.py new
@@ -688,15 +1146,15 @@ python main.py new
 
 ---
 
-## 🏗️ ساخت فایل اجرایی
+## 🏗️ ساخت WPForge
 
 WPForge را می‌توان با استفاده از **PyInstaller** به یک فایل اجرایی مستقل تبدیل کرد.
 
-فایل اجرایی تولیدشده برای اجرا روی سیستم مقصد به نصب Python نیاز ندارد.
+فایل اجرایی ایجادشده برای اجرا روی سیستم مقصد نیازی به نصب Python ندارد.
 
 دستورالعمل Build ممکن است بسته به سیستم‌عامل مقصد متفاوت باشد.
 
-GitHub Actions نیز به‌صورت خودکار Buildهای مربوط به سیستم‌عامل‌های پشتیبانی‌شده را تولید می‌کند.
+GitHub Actions به‌صورت خودکار Packageهای Release را برای Platformهای پشتیبانی‌شده ایجاد می‌کند.
 
 ---
 
@@ -706,16 +1164,16 @@ WPForge از GitHub Actions برای خودکارسازی موارد زیر اس
 
 * تست
 * Build
-* Package
-* ساخت Release
+* Package کردن
+* ایجاد Release
 
-این پروژه برای تولید Buildهای مخصوص سیستم‌عامل‌های زیر طراحی شده است:
+این پروژه برای تولید Buildهای اختصاصی سیستم‌عامل‌های زیر طراحی شده است:
 
 * Windows
 * Linux
 * macOS
 
-فایل‌های خروجی نیز به‌صورت خودکار به GitHub Releases اضافه می‌شوند.
+Artifactهای Release به‌صورت خودکار به GitHub Releases اضافه می‌شوند.
 
 ---
 
@@ -741,64 +1199,60 @@ WPForge/
 templates/wordpress-plugin/plugin-name
 ```
 
-شامل Template مربوط به WordPress Plugin Boilerplate است که WPForge برای ساخت افزونه‌ها از آن استفاده می‌کند.
+شامل Template مربوط به WordPress Plugin Boilerplate است که توسط WPForge استفاده می‌شود.
 
 ---
 
-## 📚 بر پایه چه پروژه‌هایی ساخته شده است؟
+## 📚 بر پایه
 
-WPForge از پروژه‌ها و کارهای زیر الهام گرفته و بر پایه ساختار آن‌ها توسعه داده شده است:
+WPForge از پروژه‌ها و کارهای زیر الهام گرفته و بر پایه ساختار آن‌ها توسعه یافته است:
 
 * Tmeister's WPPB CLI
 * WordPress Plugin Boilerplate
 
-WPForge پیاده‌سازی CLI و ابزارهای اختصاصی خود را برای کار با ساختار WordPress Plugin Boilerplate ارائه می‌دهد.
+WPForge پیاده‌سازی CLI و ابزارهای اختصاصی خود را در کنار ساختار WordPress Plugin Boilerplate ارائه می‌دهد.
 
 ---
 
 ## 📄 مجوز
 
-WPForge تحت مجوز:
+WPForge تحت مجوز زیر منتشر شده است:
 
 **GNU General Public License v2.0 or later (GPL-2.0-or-later)**
 
-منتشر می‌شود.
-
-برای مشاهده متن کامل مجوز:
+برای مشاهده متن کامل مجوز، فایل زیر را ببینید:
 
 ```text
 LICENSE
 ```
 
-را مشاهده کنید.
-
 ---
 
-## 🤝 مشارکت در پروژه
+## 🤝 مشارکت
 
-مشارکت در توسعه WPForge آزاد است.
+از مشارکت شما در توسعه پروژه استقبال می‌شود.
 
-اگر با مشکلی مواجه شدید یا ایده‌ای برای بهبود پروژه دارید:
+اگر Bug پیدا کردید یا ایده‌ای برای بهبود پروژه دارید:
 
 1. یک Issue ایجاد کنید.
 2. مشکل یا قابلیت پیشنهادی را توضیح دهید.
-3. در صورت امکان، مراحل بازتولید مشکل را ارائه کنید.
-4. اگر راه‌حل یا اصلاحی برای مشکل دارید، یک Pull Request ارسال کنید.
+3. در صورت امکان، مراحل بازتولید مشکل را ارائه دهید.
+4. اگر راه‌حل مشکل را دارید، یک Pull Request ارسال کنید.
 
 ---
 
-## 🐛 گزارش خطا
+## 🐛 گزارش Bug
 
-هنگام گزارش یک Bug، اطلاعات زیر را ارائه کنید:
+هنگام گزارش Bug، اطلاعات زیر را ارائه دهید:
 
 * سیستم‌عامل
 * نسخه WPForge
-* نسخه Python در صورت اجرای Source
-* دستور استفاده‌شده
+* نسخه Python، در صورت اجرای پروژه از Source
+* دستوری که اجرا کرده‌اید
 * متن کامل خطا
 * مراحل بازتولید مشکل
 
-### نمونه
+مثال:
 
 ```text
 OS: Windows 11
@@ -818,13 +1272,9 @@ Error:
 
 اگر WPForge برای شما مفید است:
 
-⭐ به Repository پروژه در GitHub Star بدهید.
+⭐ به Repository در GitHub Star بدهید.
 
-همچنین می‌توانید:
-
-* Bug گزارش کنید.
-* قابلیت جدید پیشنهاد دهید.
-* در توسعه پروژه مشارکت کنید.
+همچنین می‌توانید Bugها را گزارش کنید، قابلیت‌های جدید پیشنهاد دهید و در توسعه پروژه مشارکت کنید.
 
 <p align="center">
   ساخته‌شده با ❤️ توسط
