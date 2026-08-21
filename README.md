@@ -585,6 +585,469 @@ You do not need to download the source code unless you want to develop WPForge i
 
 ---
 
+## 🚀 Creating a Release
+
+WPForge uses Git tags to create new releases.
+
+When a new version tag such as `v1.0.0` is pushed to GitHub, GitHub Actions automatically:
+
+- 🪟 Builds Windows x64
+- 🐧 Builds Linux x64
+- 🍎 Builds macOS ARM64
+- 🍎 Builds macOS Intel x64
+- 🔐 Generates SHA-256 checksums
+- 📦 Creates a GitHub Release
+- ⬆️ Uploads all compiled binaries to the release
+- 📝 Generates release notes
+
+You do not need to manually build the application for each operating system.
+
+---
+
+### 📋 Release Requirements
+
+Before creating a release, make sure:
+
+1. Your working tree is clean.
+2. All changes have been committed.
+3. You are on the correct branch.
+4. The project builds successfully.
+5. The version number is correct.
+
+Check your Git status:
+
+```bash
+git status
+````
+
+You should ideally see:
+
+```text
+nothing to commit, working tree clean
+```
+
+---
+
+### 🪟 Windows
+
+WPForge includes:
+
+```text
+scripts/release.bat
+```
+
+This script is intended for Windows users.
+
+### 1. Open Command Prompt
+
+Open **Command Prompt (CMD)** and go to the WPForge directory:
+
+```bat
+cd D:\WPForge
+```
+
+You can also use another directory if WPForge is located elsewhere.
+
+### 2. Run the release script
+
+For example, to release version `1.0.0`:
+
+```bat
+scripts\release.bat 1.0.0
+```
+
+The script will create and push:
+
+```text
+v1.0.0
+```
+
+to GitHub.
+
+### 3. What happens next?
+
+After the tag is pushed:
+
+```text
+release.bat
+    ↓
+Git commit
+    ↓
+Git tag v1.0.0
+    ↓
+Push tag to GitHub
+    ↓
+GitHub Actions starts
+    ↓
+Build Windows
+Build Linux
+Build macOS ARM64
+Build macOS x64
+    ↓
+Generate SHA256SUMS.txt
+    ↓
+Create GitHub Release
+    ↓
+Upload release files
+```
+
+You can monitor the build from:
+
+**GitHub → Actions**
+
+---
+
+### 🐧 Linux / 🍎 macOS
+
+WPForge also includes:
+
+```text
+scripts/release.sh
+```
+
+The same script can be used on Linux and macOS.
+
+### 1. Open Terminal
+
+Go to the WPForge directory:
+
+```bash
+cd /path/to/WPForge
+```
+
+For example:
+
+```bash
+cd ~/WPForge
+```
+
+### 2. Make the script executable
+
+You only need to do this once:
+
+```bash
+chmod +x scripts/release.sh
+```
+
+### 3. Create a release
+
+For example:
+
+```bash
+./scripts/release.sh 1.0.0
+```
+
+This creates:
+
+```text
+v1.0.0
+```
+
+and pushes the tag to GitHub.
+
+GitHub Actions will then automatically build all supported platforms.
+
+---
+
+### 🔢 Versioning
+
+WPForge releases use the following format:
+
+```text
+MAJOR.MINOR.PATCH
+```
+
+For example:
+
+```text
+1.0.0
+1.0.1
+1.1.0
+2.0.0
+```
+
+The Git tag automatically receives the `v` prefix:
+
+```text
+v1.0.0
+v1.0.1
+v1.1.0
+v2.0.0
+```
+
+### Version examples
+
+Bug fix:
+
+```text
+1.0.0 → 1.0.1
+```
+
+New backward-compatible feature:
+
+```text
+1.0.0 → 1.1.0
+```
+
+Breaking change:
+
+```text
+1.0.0 → 2.0.0
+```
+
+---
+
+### ⚠️ Important
+
+Do **not** manually create the GitHub Release when using the release scripts.
+
+The release process is automated.
+
+You only need to create and push the version tag.
+
+GitHub Actions will create the Release automatically.
+
+---
+
+### 🛠️ Manual Release
+
+If you do not want to use the provided scripts, you can create a release manually.
+
+First commit your changes:
+
+```bash
+git add .
+git commit -m "Release v1.0.0"
+```
+
+Create the tag:
+
+```bash
+git tag v1.0.0
+```
+
+Push the branch:
+
+```bash
+git push origin main
+```
+
+Push the tag:
+
+```bash
+git push origin v1.0.0
+```
+
+After the tag is pushed, GitHub Actions automatically starts the release workflow.
+
+---
+
+### 🔍 Checking the Release
+
+After pushing the tag, open the GitHub repository and go to:
+
+```text
+Actions
+```
+
+You should see:
+
+```text
+Build and Release WPForge
+```
+
+Wait until all jobs finish successfully.
+
+The workflow should produce:
+
+```text
+Windows x64
+Linux x64
+macOS ARM64
+macOS Intel x64
+SHA256SUMS.txt
+```
+
+The final files will be available under:
+
+```text
+GitHub
+  → Releases
+    → WPForge v1.0.0
+```
+
+---
+
+### 📦 Release Files
+
+A typical WPForge release contains:
+
+```text
+WPForge-v1.0.0-Windows-x64.exe
+WPForge-v1.0.0-Linux-x64
+WPForge-v1.0.0-macOS-arm64
+WPForge-v1.0.0-macOS-x64
+SHA256SUMS.txt
+```
+
+### Windows
+
+Download:
+
+```text
+WPForge-v1.0.0-Windows-x64.exe
+```
+
+No Python installation is required.
+
+### Linux
+
+Download:
+
+```text
+WPForge-v1.0.0-Linux-x64
+```
+
+Then:
+
+```bash
+chmod +x WPForge-v1.0.0-Linux-x64
+```
+
+Run:
+
+```bash
+./WPForge-v1.0.0-Linux-x64
+```
+
+### macOS Apple Silicon
+
+For Apple Silicon Macs such as M1, M2, M3 and M4:
+
+```text
+WPForge-v1.0.0-macOS-arm64
+```
+
+Run:
+
+```bash
+chmod +x WPForge-v1.0.0-macOS-arm64
+./WPForge-v1.0.0-macOS-arm64
+```
+
+### macOS Intel
+
+For Intel-based Macs:
+
+```text
+WPForge-v1.0.0-macOS-x64
+```
+
+Run:
+
+```bash
+chmod +x WPForge-v1.0.0-macOS-x64
+./WPForge-v1.0.0-macOS-x64
+```
+
+---
+
+### 🔐 SHA-256 Checksums
+
+Every release includes:
+
+```text
+SHA256SUMS.txt
+```
+
+This file contains SHA-256 hashes for the release binaries.
+
+You can use it to verify that a downloaded file has not been corrupted or modified.
+
+### Windows
+
+PowerShell:
+
+```powershell
+Get-FileHash .\WPForge-v1.0.0-Windows-x64.exe -Algorithm SHA256
+```
+
+### Linux
+
+```bash
+sha256sum WPForge-v1.0.0-Linux-x64
+```
+
+### macOS
+
+```bash
+shasum -a 256 WPForge-v1.0.0-macOS-arm64
+```
+
+Compare the generated hash with the corresponding value in:
+
+```text
+SHA256SUMS.txt
+```
+
+---
+
+### ❌ If a Release Fails
+
+If GitHub Actions fails:
+
+1. Open the repository on GitHub.
+2. Go to **Actions**.
+3. Open the failed workflow.
+4. Select the failed job.
+5. Check the error message.
+
+Do not immediately create another tag with the same version.
+
+For example, if:
+
+```text
+v1.0.0
+```
+
+failed, fix the problem first.
+
+Then use a new patch version:
+
+```text
+v1.0.1
+```
+
+unless the original tag can safely be deleted and recreated.
+
+---
+
+### 💡 Recommended Release Workflow
+
+For normal development, the recommended workflow is:
+
+```text
+1. Make changes
+      ↓
+2. Test locally
+      ↓
+3. Commit changes
+      ↓
+4. Run release.bat / release.sh
+      ↓
+5. Tag vX.Y.Z is pushed
+      ↓
+6. GitHub Actions builds all platforms
+      ↓
+7. GitHub Release is created
+      ↓
+8. Users download the binaries
+```
+
+This keeps the release process simple and consistent across Windows, Linux and macOS.
+
+---
+
 ## 🔄 Updating WPForge
 
 ### Windows
@@ -790,469 +1253,6 @@ Error:
 ```
 
 ---
-## 🚀 Creating a Release
-
-WPForge uses Git tags to create new releases.
-
-When a new version tag such as `v1.0.0` is pushed to GitHub, GitHub Actions automatically:
-
-- 🪟 Builds Windows x64
-- 🐧 Builds Linux x64
-- 🍎 Builds macOS ARM64
-- 🍎 Builds macOS Intel x64
-- 🔐 Generates SHA-256 checksums
-- 📦 Creates a GitHub Release
-- ⬆️ Uploads all compiled binaries to the release
-- 📝 Generates release notes
-
-You do not need to manually build the application for each operating system.
-
----
-
-### 📋 Release Requirements
-
-Before creating a release, make sure:
-
-1. Your working tree is clean.
-2. All changes have been committed.
-3. You are on the correct branch.
-4. The project builds successfully.
-5. The version number is correct.
-
-Check your Git status:
-
-```bash
-git status
-````
-
-You should ideally see:
-
-```text
-nothing to commit, working tree clean
-```
-
----
-
-# 🪟 Windows
-
-WPForge includes:
-
-```text
-scripts/release.bat
-```
-
-This script is intended for Windows users.
-
-### 1. Open Command Prompt
-
-Open **Command Prompt (CMD)** and go to the WPForge directory:
-
-```bat
-cd D:\WPForge
-```
-
-You can also use another directory if WPForge is located elsewhere.
-
-### 2. Run the release script
-
-For example, to release version `1.0.0`:
-
-```bat
-scripts\release.bat 1.0.0
-```
-
-The script will create and push:
-
-```text
-v1.0.0
-```
-
-to GitHub.
-
-### 3. What happens next?
-
-After the tag is pushed:
-
-```text
-release.bat
-    ↓
-Git commit
-    ↓
-Git tag v1.0.0
-    ↓
-Push tag to GitHub
-    ↓
-GitHub Actions starts
-    ↓
-Build Windows
-Build Linux
-Build macOS ARM64
-Build macOS x64
-    ↓
-Generate SHA256SUMS.txt
-    ↓
-Create GitHub Release
-    ↓
-Upload release files
-```
-
-You can monitor the build from:
-
-**GitHub → Actions**
-
----
-
-# 🐧 Linux / 🍎 macOS
-
-WPForge also includes:
-
-```text
-scripts/release.sh
-```
-
-The same script can be used on Linux and macOS.
-
-### 1. Open Terminal
-
-Go to the WPForge directory:
-
-```bash
-cd /path/to/WPForge
-```
-
-For example:
-
-```bash
-cd ~/WPForge
-```
-
-### 2. Make the script executable
-
-You only need to do this once:
-
-```bash
-chmod +x scripts/release.sh
-```
-
-### 3. Create a release
-
-For example:
-
-```bash
-./scripts/release.sh 1.0.0
-```
-
-This creates:
-
-```text
-v1.0.0
-```
-
-and pushes the tag to GitHub.
-
-GitHub Actions will then automatically build all supported platforms.
-
----
-
-# 🔢 Versioning
-
-WPForge releases use the following format:
-
-```text
-MAJOR.MINOR.PATCH
-```
-
-For example:
-
-```text
-1.0.0
-1.0.1
-1.1.0
-2.0.0
-```
-
-The Git tag automatically receives the `v` prefix:
-
-```text
-v1.0.0
-v1.0.1
-v1.1.0
-v2.0.0
-```
-
-### Version examples
-
-Bug fix:
-
-```text
-1.0.0 → 1.0.1
-```
-
-New backward-compatible feature:
-
-```text
-1.0.0 → 1.1.0
-```
-
-Breaking change:
-
-```text
-1.0.0 → 2.0.0
-```
-
----
-
-# ⚠️ Important
-
-Do **not** manually create the GitHub Release when using the release scripts.
-
-The release process is automated.
-
-You only need to create and push the version tag.
-
-GitHub Actions will create the Release automatically.
-
----
-
-# 🛠️ Manual Release
-
-If you do not want to use the provided scripts, you can create a release manually.
-
-First commit your changes:
-
-```bash
-git add .
-git commit -m "Release v1.0.0"
-```
-
-Create the tag:
-
-```bash
-git tag v1.0.0
-```
-
-Push the branch:
-
-```bash
-git push origin main
-```
-
-Push the tag:
-
-```bash
-git push origin v1.0.0
-```
-
-After the tag is pushed, GitHub Actions automatically starts the release workflow.
-
----
-
-# 🔍 Checking the Release
-
-After pushing the tag, open the GitHub repository and go to:
-
-```text
-Actions
-```
-
-You should see:
-
-```text
-Build and Release WPForge
-```
-
-Wait until all jobs finish successfully.
-
-The workflow should produce:
-
-```text
-Windows x64
-Linux x64
-macOS ARM64
-macOS Intel x64
-SHA256SUMS.txt
-```
-
-The final files will be available under:
-
-```text
-GitHub
-  → Releases
-    → WPForge v1.0.0
-```
-
----
-
-# 📦 Release Files
-
-A typical WPForge release contains:
-
-```text
-WPForge-v1.0.0-Windows-x64.exe
-WPForge-v1.0.0-Linux-x64
-WPForge-v1.0.0-macOS-arm64
-WPForge-v1.0.0-macOS-x64
-SHA256SUMS.txt
-```
-
-### Windows
-
-Download:
-
-```text
-WPForge-v1.0.0-Windows-x64.exe
-```
-
-No Python installation is required.
-
-### Linux
-
-Download:
-
-```text
-WPForge-v1.0.0-Linux-x64
-```
-
-Then:
-
-```bash
-chmod +x WPForge-v1.0.0-Linux-x64
-```
-
-Run:
-
-```bash
-./WPForge-v1.0.0-Linux-x64
-```
-
-### macOS Apple Silicon
-
-For Apple Silicon Macs such as M1, M2, M3 and M4:
-
-```text
-WPForge-v1.0.0-macOS-arm64
-```
-
-Run:
-
-```bash
-chmod +x WPForge-v1.0.0-macOS-arm64
-./WPForge-v1.0.0-macOS-arm64
-```
-
-### macOS Intel
-
-For Intel-based Macs:
-
-```text
-WPForge-v1.0.0-macOS-x64
-```
-
-Run:
-
-```bash
-chmod +x WPForge-v1.0.0-macOS-x64
-./WPForge-v1.0.0-macOS-x64
-```
-
----
-
-# 🔐 SHA-256 Checksums
-
-Every release includes:
-
-```text
-SHA256SUMS.txt
-```
-
-This file contains SHA-256 hashes for the release binaries.
-
-You can use it to verify that a downloaded file has not been corrupted or modified.
-
-### Windows
-
-PowerShell:
-
-```powershell
-Get-FileHash .\WPForge-v1.0.0-Windows-x64.exe -Algorithm SHA256
-```
-
-### Linux
-
-```bash
-sha256sum WPForge-v1.0.0-Linux-x64
-```
-
-### macOS
-
-```bash
-shasum -a 256 WPForge-v1.0.0-macOS-arm64
-```
-
-Compare the generated hash with the corresponding value in:
-
-```text
-SHA256SUMS.txt
-```
-
----
-
-# ❌ If a Release Fails
-
-If GitHub Actions fails:
-
-1. Open the repository on GitHub.
-2. Go to **Actions**.
-3. Open the failed workflow.
-4. Select the failed job.
-5. Check the error message.
-
-Do not immediately create another tag with the same version.
-
-For example, if:
-
-```text
-v1.0.0
-```
-
-failed, fix the problem first.
-
-Then use a new patch version:
-
-```text
-v1.0.1
-```
-
-unless the original tag can safely be deleted and recreated.
-
----
-
-# 💡 Recommended Release Workflow
-
-For normal development, the recommended workflow is:
-
-```text
-1. Make changes
-      ↓
-2. Test locally
-      ↓
-3. Commit changes
-      ↓
-4. Run release.bat / release.sh
-      ↓
-5. Tag vX.Y.Z is pushed
-      ↓
-6. GitHub Actions builds all platforms
-      ↓
-7. GitHub Release is created
-      ↓
-8. Users download the binaries
-```
-
-This keeps the release process simple and consistent across Windows, Linux and macOS.
-
-```
-
 ## ⭐ Support the Project
 
 If WPForge is useful to you:
