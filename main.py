@@ -13,7 +13,7 @@ from rich.text import Text
 
 
 APP_NAME = "WPForge"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 
 CONFIG_FILE_NAME = ".wpforge"
 
@@ -22,6 +22,31 @@ TEMPLATE_RELATIVE_PATH = (
     / "wordpress-plugin"
     / "plugin-name"
 )
+
+TEXT_EXTENSIONS = {
+    ".php",
+    ".js",
+    ".css",
+    ".scss",
+    ".sass",
+    ".less",
+    ".html",
+    ".htm",
+    ".txt",
+    ".md",
+    ".json",
+    ".xml",
+    ".yml",
+    ".yaml",
+    ".po",
+    ".pot",
+    ".ini",
+    ".conf",
+    ".dist",
+    ".sh",
+    ".bat",
+    ".cmd",
+}
 
 console = Console()
 
@@ -38,15 +63,15 @@ def print_banner() -> None:
     """Print the WPForge banner."""
 
     banner = r"""
- __          _______  ______                    
- \ \        / /  __ \|  ____|                   
-  \ \  /\  / /| |__) | |__ ___  _ __ __ _  ___  
-   \ \/  \/ / |  ___/|  __/ _ \| '__/ _` |/ _ \ 
-    \  /\  /  | |    | | | (_) | | | (_| |  __/ 
-     \/  \/   |_|    |_|  \___/|_|  \__, |\___| 
-                                     __/ |      
-                                    |___/       
-                                    
+ __          _______  ______
+ \ \        / /  __ \|  ____|
+  \ \  /\  / /| |__) | |__ ___  _ __ __ _  ___
+   \ \/  \/ / |  ___/|  __/ _ \| '__/ _` |/ _ \
+    \  /\  /  | |    | | | (_) | | | (_| |  __/
+     \/  \/   |_|    |_|  \___/|_|  \__, |\___|
+                                     __/ |
+                                    |___/
+
          WordPress Plugin Generator
     """
 
@@ -107,7 +132,6 @@ def read_config_file() -> dict[str, str]:
             "r",
             encoding="utf-8",
         ) as file:
-
             for line in file:
                 line = line.strip()
 
@@ -123,11 +147,9 @@ def read_config_file() -> dict[str, str]:
                 config[key.strip()] = value.strip()
 
     except OSError as error:
-
         print_warning(
             f"Unable to read {config_path}: {error}"
         )
-
         return {}
 
     required_keys = {
@@ -137,12 +159,10 @@ def read_config_file() -> dict[str, str]:
     }
 
     if not required_keys.issubset(config):
-
         print_warning(
             f"The {CONFIG_FILE_NAME} configuration file "
             "is incomplete."
         )
-
         return {}
 
     return config
@@ -156,7 +176,7 @@ def validate_plugin_slug(value: str) -> bool:
     """
     Validate a WordPress plugin slug.
 
-    Examples of valid slugs:
+    Valid examples:
 
         my-plugin
         woocommerce-discount
@@ -173,11 +193,10 @@ def validate_plugin_slug(value: str) -> bool:
 
 
 def validate_url(value: str) -> bool:
-    """Validate an HTTP/HTTPS URL."""
+    """Validate an HTTP or HTTPS URL."""
 
     try:
         result = urlparse(value)
-
     except ValueError:
         return False
 
@@ -212,10 +231,9 @@ def get_template_directory() -> Path:
 
     candidates = [
         Path(__file__).resolve().parent
-        / TEMPLATE_RELATIVE_PATH
+        / TEMPLATE_RELATIVE_PATH,
     ]
 
-    # PyInstaller extracts bundled files into _MEIPASS.
     bundle_root = getattr(
         sys,
         "_MEIPASS",
@@ -223,14 +241,12 @@ def get_template_directory() -> Path:
     )
 
     if bundle_root:
-
         candidates.append(
             Path(bundle_root)
             / TEMPLATE_RELATIVE_PATH
         )
 
     for candidate in candidates:
-
         if candidate.is_dir():
             return candidate
 
@@ -246,35 +262,52 @@ def get_template_directory() -> Path:
     )
 
 
+def replace_plugin_header(
+    content: str,
+    *,
+    plugin_name: str,
+    plugin_url: str,
+    plugin_description: str,
+    author_name: str,
+    author_email: str,
+    author_url: str,
+) -> str:
+    """
+    Replace WordPress plugin header fields.
+
+    Header replacement is based on field names rather than the
+    original boilerplate text, so changes to the template wording
+    do not break plugin generation.
+    """
+
+    fields = {
+        "Plugin Name": plugin_name,
+        "Plugin URI": plugin_url,
+        "Description": plugin_description,
+        "Author": author_name,
+        "Author URI": author_url,
+        "Author Email": author_email,
+    }
+
+    for field, value in fields.items():
+        pattern = (
+            rf"(^\s*\*\s*{re.escape(field)}:"
+            rf"\s*).*$"
+        )
+
+        content = re.sub(
+            pattern,
+            lambda match: f"{match.group(1)}{value}",
+            content,
+            flags=re.MULTILINE,
+        )
+
+    return content
+
+
 # ============================================================================
 # File handling
 # ============================================================================
-
-TEXT_EXTENSIONS = {
-    ".php",
-    ".js",
-    ".css",
-    ".scss",
-    ".sass",
-    ".less",
-    ".html",
-    ".htm",
-    ".txt",
-    ".md",
-    ".json",
-    ".xml",
-    ".yml",
-    ".yaml",
-    ".po",
-    ".pot",
-    ".ini",
-    ".conf",
-    ".dist",
-    ".sh",
-    ".bat",
-    ".cmd",
-}
-
 
 def is_text_file(path: Path) -> bool:
     """Return whether a file should be treated as text."""
@@ -298,34 +331,27 @@ def replace_in_file(
         content = path.read_text(
             encoding="utf-8",
         )
-
-    except (
-        UnicodeDecodeError,
-        OSError,
-    ):
+    except UnicodeDecodeError:
         return
-
-    original_content = content
+    except OSError as error:
+        raise WPForgeException(
+            f"Unable to read file:\n"
+            f"{path}\n\n"
+            f"{error}"
+        ) from error
 
     for old, new in replacements.items():
-
         content = content.replace(
             old,
             new,
         )
 
-    if content == original_content:
-        return
-
     try:
-
         path.write_text(
             content,
             encoding="utf-8",
         )
-
     except OSError as error:
-
         raise WPForgeException(
             f"Unable to write file:\n"
             f"{path}\n\n"
@@ -340,13 +366,63 @@ def replace_strings(
     """Replace placeholders throughout a plugin directory."""
 
     for path in directory.rglob("*"):
-
         if path.is_file():
-
             replace_in_file(
                 path,
                 replacements,
             )
+
+
+def replace_plugin_headers(
+    directory: Path,
+    *,
+    plugin_name: str,
+    plugin_url: str,
+    plugin_description: str,
+    author_name: str,
+    author_email: str,
+    author_url: str,
+) -> None:
+    """Update WordPress plugin headers in PHP files."""
+
+    for path in directory.rglob("*.php"):
+        try:
+            content = path.read_text(
+                encoding="utf-8",
+            )
+        except UnicodeDecodeError:
+            continue
+        except OSError as error:
+            raise WPForgeException(
+                f"Unable to read file:\n"
+                f"{path}\n\n"
+                f"{error}"
+            ) from error
+
+        updated_content = replace_plugin_header(
+            content,
+            plugin_name=plugin_name,
+            plugin_url=plugin_url,
+            plugin_description=plugin_description,
+            author_name=author_name,
+            author_email=author_email,
+            author_url=author_url,
+        )
+
+        if updated_content == content:
+            continue
+
+        try:
+            path.write_text(
+                updated_content,
+                encoding="utf-8",
+            )
+        except OSError as error:
+            raise WPForgeException(
+                f"Unable to write file:\n"
+                f"{path}\n\n"
+                f"{error}"
+            ) from error
 
 
 def rename_template_paths(
@@ -373,7 +449,6 @@ def rename_template_paths(
     )
 
     for path in paths:
-
         if "plugin-name" not in path.name:
             continue
 
@@ -385,7 +460,6 @@ def rename_template_paths(
         )
 
         if new_path.exists():
-
             raise WPForgeException(
                 f"Cannot rename:\n"
                 f"{path}\n"
@@ -394,7 +468,16 @@ def rename_template_paths(
                 "The destination already exists."
             )
 
-        path.rename(new_path)
+        try:
+            path.rename(new_path)
+        except OSError as error:
+            raise WPForgeException(
+                f"Unable to rename:\n"
+                f"{path}\n"
+                f"to:\n"
+                f"{new_path}\n\n"
+                f"{error}"
+            ) from error
 
 
 # ============================================================================
@@ -416,13 +499,11 @@ def create_plugin(
     template_directory = get_template_directory()
 
     if destination.exists():
-
         raise WPForgeException(
             f"A folder named '{plugin_slug}' already exists."
         )
 
     try:
-
         shutil.copytree(
             template_directory,
             destination,
@@ -440,45 +521,32 @@ def create_plugin(
 
         upper_snake = snake_case.upper()
 
+        # These replacements handle PHP identifiers and template
+        # placeholders throughout the project.
         replacements = {
-
-            "http://example.com/plugin-name-uri/":
-                plugin_url,
-
-            "WordPress Plugin Boilerplate":
-                plugin_name,
-
-            (
-                "This is a short description of what the plugin does. "
-                "It's displayed in the WordPress admin area."
-            ):
-                plugin_description,
-
-            "Your Name or Your Company":
-                author_name,
-
-            "Your Name <email@example.com>":
-                f"{author_name} <{author_email}>",
-
-            "Plugin_Name":
-                pascal_case,
-
-            "PLUGIN_NAME_VERSION":
-                f"{upper_snake}_VERSION",
-
-            "plugin_name":
-                snake_case,
-
-            "plugin-name":
-                plugin_slug,
-
-            "http://example.com":
-                author_url,
+            "Plugin_Name": pascal_case,
+            "PLUGIN_NAME_VERSION": (
+                f"{upper_snake}_VERSION"
+            ),
+            "plugin_name": snake_case,
+            "plugin-name": plugin_slug,
         }
 
         replace_strings(
             destination,
             replacements,
+        )
+
+        # Plugin metadata is handled separately so it does not depend
+        # on the exact wording used by the boilerplate template.
+        replace_plugin_headers(
+            destination,
+            plugin_name=plugin_name,
+            plugin_url=plugin_url,
+            plugin_description=plugin_description,
+            author_name=author_name,
+            author_email=author_email,
+            author_url=author_url,
         )
 
         rename_template_paths(
@@ -487,27 +555,22 @@ def create_plugin(
         )
 
     except WPForgeException:
+        shutil.rmtree(
+            destination,
+            ignore_errors=True,
+        )
         raise
 
     except OSError as error:
-
         shutil.rmtree(
             destination,
             ignore_errors=True,
         )
 
         raise WPForgeException(
-            f"Unable to create plugin:\n{error}"
+            f"Unable to create plugin:\n"
+            f"{error}"
         ) from error
-
-    except Exception:
-
-        shutil.rmtree(
-            destination,
-            ignore_errors=True,
-        )
-
-        raise
 
 
 # ============================================================================
@@ -538,9 +601,9 @@ def is_wordpress_plugin_directory(
 def prompt_plugin_slug(
     value: str | None,
 ) -> str:
+    """Prompt for and validate a plugin slug."""
 
     while True:
-
         result = value or click.prompt(
             "Plugin slug",
             default="sample-plugin",
@@ -562,9 +625,9 @@ def prompt_url(
     value: str | None,
     default: str,
 ) -> str:
+    """Prompt for and validate an HTTP/HTTPS URL."""
 
     while True:
-
         result = value or click.prompt(
             message,
             default=default,
@@ -584,9 +647,9 @@ def prompt_email(
     value: str | None,
     default: str,
 ) -> str:
+    """Prompt for and validate an email address."""
 
     while True:
-
         result = value or click.prompt(
             "Author email",
             default=default,
@@ -663,7 +726,6 @@ def new(
     if not is_wordpress_plugin_directory(
         current_directory
     ):
-
         print_warning(
             "Current directory does not look like "
             "wp-content/plugins."
@@ -676,7 +738,6 @@ def new(
                 default=False,
             )
         ):
-
             print_error(
                 "Plugin creation cancelled."
             )
@@ -694,7 +755,6 @@ def new(
     # ------------------------------------------------------------------------
 
     if non_interactive:
-
         parameters = {
             "--plugin-name": plugin_name,
             "--plugin-slug": plugin_slug,
@@ -712,7 +772,6 @@ def new(
         ]
 
         if missing:
-
             raise click.UsageError(
                 "Missing required options in "
                 "--non-interactive mode:\n\n"
@@ -727,7 +786,6 @@ def new(
     # ------------------------------------------------------------------------
 
     else:
-
         plugin_name = (
             plugin_name
             or click.prompt(
@@ -737,7 +795,7 @@ def new(
         )
 
         plugin_slug = prompt_plugin_slug(
-            plugin_slug
+            plugin_slug,
         )
 
         plugin_url = prompt_url(
@@ -798,37 +856,25 @@ def new(
     # Validation
     # ------------------------------------------------------------------------
 
-    if not validate_plugin_slug(
-        plugin_slug
-    ):
-
+    if not validate_plugin_slug(plugin_slug):
         raise click.BadParameter(
             "Invalid plugin slug.",
             param_hint="--plugin-slug",
         )
 
-    if not validate_url(
-        plugin_url
-    ):
-
+    if not validate_url(plugin_url):
         raise click.BadParameter(
             "Invalid plugin URL.",
             param_hint="--plugin-url",
         )
 
-    if not validate_url(
-        author_url
-    ):
-
+    if not validate_url(author_url):
         raise click.BadParameter(
             "Invalid author URL.",
             param_hint="--author-url",
         )
 
-    if not validate_email(
-        author_email
-    ):
-
+    if not validate_email(author_email):
         raise click.BadParameter(
             "Invalid author email.",
             param_hint="--author-email",
@@ -844,7 +890,6 @@ def new(
     )
 
     if destination.exists():
-
         raise click.ClickException(
             f"A folder named '{plugin_slug}' "
             "already exists."
@@ -860,7 +905,6 @@ def new(
     )
 
     try:
-
         with Progress(
             SpinnerColumn(),
             TextColumn(
@@ -868,7 +912,6 @@ def new(
             ),
             console=console,
         ) as progress:
-
             task = progress.add_task(
                 "Creating plugin...",
                 total=None,
@@ -891,13 +934,11 @@ def new(
             )
 
     except WPForgeException as error:
-
         raise click.ClickException(
             str(error)
         ) from error
 
     except Exception as error:
-
         shutil.rmtree(
             destination,
             ignore_errors=True,
@@ -951,7 +992,6 @@ def cli(
     """WPForge - WordPress Plugin Generator."""
 
     if ctx.invoked_subcommand is None:
-
         print_banner()
 
         console.print(
@@ -973,9 +1013,7 @@ def cli(
         )
 
 
-cli.add_command(
-    new
-)
+cli.add_command(new)
 
 
 if __name__ == "__main__":
