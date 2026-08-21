@@ -790,9 +790,6 @@ Error:
 ```
 
 ---
-حتماً. این بخش را می‌توانی **مستقیماً داخل README.md** بگذاری. هم Windows (`.bat`) و هم Linux/macOS (`.sh`) را توضیح می‌دهد و برای کاربر مبتدی هم قابل فهم است.
-
-````markdown
 ## 🚀 Creating a Release
 
 WPForge uses Git tags to create new releases.
