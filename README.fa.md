@@ -732,7 +732,7 @@ WPForge/
 │       └── plugin-name/
 └── .github/
     └── workflows/
-        └── test-and-release.yml
+        └── release.yml
 ```
 
 پوشه:
