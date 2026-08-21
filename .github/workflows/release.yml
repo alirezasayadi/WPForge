@@ -1,0 +1,340 @@
+name: Build and Release WPForge
+
+on:
+  push:
+    tags:
+      - "v*"
+
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (example: 1.0.0)"
+        required: true
+        default: "1.0.0"
+
+permissions:
+  contents: write
+
+jobs:
+
+  # ==========================================================================
+  # Windows
+  # ==========================================================================
+
+  build-windows:
+    name: Build Windows x64
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Determine version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Build executable
+        shell: bash
+        run: |
+          pyinstaller \
+            --noconfirm \
+            --clean \
+            --onefile \
+            --name "WPForge-v${{ steps.version.outputs.version }}-Windows-x64" \
+            --add-data "templates;templates" \
+            main.py
+
+      - name: Test executable
+        shell: bash
+        run: |
+          ./dist/WPForge-v${{ steps.version.outputs.version }}-Windows-x64.exe --version
+          ./dist/WPForge-v${{ steps.version.outputs.version }}-Windows-x64.exe --help
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wpforge-windows-x64
+          path: dist/WPForge-v${{ steps.version.outputs.version }}-Windows-x64.exe
+
+
+  # ==========================================================================
+  # Linux
+  # ==========================================================================
+
+  build-linux:
+    name: Build Linux x64
+    runs-on: ubuntu-24.04
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Determine version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Build executable
+        shell: bash
+        run: |
+          pyinstaller \
+            --noconfirm \
+            --clean \
+            --onefile \
+            --name "WPForge-v${{ steps.version.outputs.version }}-Linux-x64" \
+            --add-data "templates:templates" \
+            main.py
+
+      - name: Test executable
+        run: |
+          chmod +x "dist/WPForge-v${{ steps.version.outputs.version }}-Linux-x64"
+
+          "./dist/WPForge-v${{ steps.version.outputs.version }}-Linux-x64" --version
+          "./dist/WPForge-v${{ steps.version.outputs.version }}-Linux-x64" --help
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wpforge-linux-x64
+          path: dist/WPForge-v${{ steps.version.outputs.version }}-Linux-x64
+
+
+  # ==========================================================================
+  # macOS Apple Silicon
+  # ==========================================================================
+
+  build-macos-arm64:
+    name: Build macOS ARM64
+    runs-on: macos-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Determine version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Build executable
+        shell: bash
+        run: |
+          pyinstaller \
+            --noconfirm \
+            --clean \
+            --onefile \
+            --name "WPForge-v${{ steps.version.outputs.version }}-macOS-arm64" \
+            --add-data "templates:templates" \
+            main.py
+
+      - name: Test executable
+        run: |
+          chmod +x "dist/WPForge-v${{ steps.version.outputs.version }}-macOS-arm64"
+
+          "./dist/WPForge-v${{ steps.version.outputs.version }}-macOS-arm64" --version
+          "./dist/WPForge-v${{ steps.version.outputs.version }}-macOS-arm64" --help
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wpforge-macos-arm64
+          path: dist/WPForge-v${{ steps.version.outputs.version }}-macOS-arm64
+
+
+  # ==========================================================================
+  # macOS Intel
+  # ==========================================================================
+
+  build-macos-x64:
+    name: Build macOS x64
+    runs-on: macos-15-intel
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Determine version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Build executable
+        shell: bash
+        run: |
+          pyinstaller \
+            --noconfirm \
+            --clean \
+            --onefile \
+            --name "WPForge-v${{ steps.version.outputs.version }}-macOS-x64" \
+            --add-data "templates:templates" \
+            main.py
+
+      - name: Test executable
+        run: |
+          chmod +x "dist/WPForge-v${{ steps.version.outputs.version }}-macOS-x64"
+
+          "./dist/WPForge-v${{ steps.version.outputs.version }}-macOS-x64" --version
+          "./dist/WPForge-v${{ steps.version.outputs.version }}-macOS-x64" --help
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wpforge-macos-x64
+          path: dist/WPForge-v${{ steps.version.outputs.version }}-macOS-x64
+
+
+  # ==========================================================================
+  # Release
+  # ==========================================================================
+
+  release:
+    name: Create GitHub Release
+    needs:
+      - build-windows
+      - build-linux
+      - build-macos-arm64
+      - build-macos-x64
+
+    runs-on: ubuntu-24.04
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wpforge-windows-x64
+          path: release
+
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wpforge-linux-x64
+          path: release
+
+      - name: Download macOS ARM64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wpforge-macos-arm64
+          path: release
+
+      - name: Download macOS x64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: wpforge-macos-x64
+          path: release
+
+      - name: Make Unix binaries executable
+        run: |
+          chmod +x release/WPForge-v${{ steps.version.outputs.version }}-Linux-x64
+          chmod +x release/WPForge-v${{ steps.version.outputs.version }}-macOS-arm64
+          chmod +x release/WPForge-v${{ steps.version.outputs.version }}-macOS-x64
+
+      - name: Generate checksums
+        working-directory: release
+        run: |
+          sha256sum * > SHA256SUMS.txt
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: WPForge v${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          files: |
+            release/WPForge-v${{ steps.version.outputs.version }}-Windows-x64.exe
+            release/WPForge-v${{ steps.version.outputs.version }}-Linux-x64
+            release/WPForge-v${{ steps.version.outputs.version }}-macOS-arm64
+            release/WPForge-v${{ steps.version.outputs.version }}-macOS-x64
+            release/SHA256SUMS.txt
